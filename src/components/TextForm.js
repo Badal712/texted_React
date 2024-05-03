@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 
 
 export default function TextForm(props) {
+
     const [text, setText] = useState('');
     //text = "new text" //Wrong way to change the state
     //setText ("new text"); //Correct way to change the state
@@ -57,22 +58,22 @@ export default function TextForm(props) {
             
             <textarea className="form-control" value={text} onChange={handelOnChange} id="myBox" rows="8" style={{backgroundColor : props.mode === 'dark'?'#212529':'white', color : props.mode === 'dark'?'white':'black'}}></textarea>
         </div>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleLowClick}>Convert to Lowercase</button>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleSpeakClick}>Speak</button>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleInvClick}>Inverse</button>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleCopyClick}>Copy</button>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleESClick}>Extra Space</button>
-        <button className="btn btn-primary mx-2 my-1" onClick={handleClearClick}>Clear</button>
+        <button disabled = {text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleUpClick}>Convert to Uppercase</button>
+        <button disabled = {text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleLowClick}>Convert to Lowercase</button>
+        <button disabled = {text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleSpeakClick}>Speak</button>
+        <button disabled = {text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleInvClick}>Inverse</button>
+        <button disabled = {text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleCopyClick}>Copy</button>
+        <button disabled = {text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleESClick}>Extra Space</button>
+        <button disabled = {text.length===0} className="btn btn-primary mx-2 my-1" onClick={handleClearClick}>Clear</button>
     </div>
     <div className="container my-3" style={{color : props.mode === 'dark'?'white':'black'}}>
       <h2>Your text summary</h2>
 
       {/* Show how many words and characters */}
-      <p>{text.split(" ").length-1} {text.split(" ").length<=1?"word":"words"} and {text.length} characters</p>
+      <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} {text.split(" ").length<=1?"word":"words"} and {text.length} characters</p>
 
       {/* Show how many time taken to read this paragraph  */}
-      <p>{0.008 * text.split(" ").length} Minutes read</p>
+      <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes read</p>
 
       {/* Show the text preview */}
       <h2>Preview</h2>
