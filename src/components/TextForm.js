@@ -39,6 +39,7 @@ export default function TextForm(props) {
       var text = document.getElementById("myBox");
       text.select();
       navigator.clipboard.writeText(text.value);
+      document.getSelection().removeAllRanges();  //remove selection mark
       props.showAlert(" Your text copied to clipboard","success");
     }
     const handleESClick = ()=>{
