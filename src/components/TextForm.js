@@ -13,20 +13,23 @@ export default function TextForm(props) {
       props.showAlert(" Your text converted to upper case sucessfully","success");
       document.title = 'editKar - UpperCase'
     }
+
     const handleLowClick = ()=>{
       let newLower = text.toLowerCase();
       setText(newLower);
       props.showAlert(" Your text converted to lower case sucessfully","success");
     }
+
     const handelOnChange = (event)=>{
-      //console.log("Uppercase was clicked");
       setText(event.target.value);
     }
+
     const handleSpeakClick = ()=>{
       let msg = new SpeechSynthesisUtterance();
       msg.text = text;
       window.speechSynthesis.speak(msg);
     }
+
     const handleInvClick = ()=>{
       let newText = "";
       for(let i = text.length-1; i >= 0; i--){
@@ -35,22 +38,24 @@ export default function TextForm(props) {
       setText(newText);
       props.showAlert(" Your text inverse sucessfully","success");
     }
+
     const handleCopyClick = ()=>{
-      var text = document.getElementById("myBox");
-      text.select();
-      navigator.clipboard.writeText(text.value);
-      document.getSelection().removeAllRanges();  //remove selection mark
+      
+      navigator.clipboard.writeText(text);
       props.showAlert(" Your text copied to clipboard","success");
     }
+
     const handleESClick = ()=>{
       let newText = text.split(/[ ]+/);
       setText(newText.join(" "));
       props.showAlert(" Extra spaces has been remove","success");
     }
+
     const handleClearClick = ()=>{
       setText("");
       props.showAlert(" Your page has been clear","danger");
     }
+    
   return (
     <>
     <div className="container"  style={{color : props.mode === 'dark'?'white':'black'}}>
@@ -71,7 +76,7 @@ export default function TextForm(props) {
       <h2>Your text summary</h2>
 
       {/* Show how many words and characters */}
-      <p>{text.split(" ").filter((element)=>{return element.length!==0}).length} {text.split(" ").length<=1?"word":"words"} and {text.length} characters</p>
+      <p>{text.split(/\s+/).filter((element)=>{return element.length!==0}).length} {text.split(" ").length<=1?"word":"words"} and {text.length} characters</p>
 
       {/* Show how many time taken to read this paragraph  */}
       <p>{0.008 * text.split(" ").filter((element)=>{return element.length!==0}).length} Minutes read</p>

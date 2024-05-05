@@ -52,7 +52,7 @@ function App() {
   return (
     <>
     <Router>
-      <Navbar title="editKar" aboutText="About US" mode={mode} toggleMode={toggleMode}/>
+      <Navbar title="TextED" aboutText="About US" mode={mode} toggleMode={toggleMode}/>
       <Alert alert={alert}/>
       <div className="container my-3">
         <Routes>
